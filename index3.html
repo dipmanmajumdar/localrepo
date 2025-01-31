@@ -1,11 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Blogging Website</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        /* Blog Post Styles */
+        .blog-post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-post h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .blog-post p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Add Post Form */
+        .add-post-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .add-post-form input,
+        .add-post-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .add-post-form button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-post-form button:hover {
+            background-color: #555;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode header {
+            background-color: #1f1f1f;
+        }
+
+        body.dark-mode .blog-post,
+        body.dark-mode .add-post-form {
+            background-color: #1f1f1f;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .blog-post h2 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .blog-post p {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .add-post-form input,
+        body.dark-mode .add-post-form textarea {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .add-post-form button {
+            background-color: #444;
+        }
+
+        body.dark-mode .add-post-form button:hover {
+            background-color: #666;
+        }
+
+        /* Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: #555;
+        }
+
+        body.dark-mode .theme-toggle {
+            background-color: #444;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background-color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-post {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
 <body>
+    <header>
+        <h1>Cool Blogging Website</h1>
+    </header>
+    <div class="container">
+        <!-- Add Post Form -->
+        <div class="add-post-form">
+            <h2>Add a New Blog Post</h2>
+            <input type="text" id="post-title" placeholder="Title">
+            <textarea id="post-content" placeholder="Content"></textarea>
+            <button onclick="addPost()">Publish</button>
+        </div>
 
-<h1>The button Element</h1>
+        <!-- Blog Posts -->
+        <div id="blog-posts">
+            <!-- Preloaded Blog Posts -->
+            <div class="blog-post">
+                <h2>Welcome to My Blog!</h2>
+                <p>This is a sample blog post. You can add your own posts using the form above. Enjoy!</p>
+            </div>
+            <div class="blog-post">
+                <h2>Why Blogging is Awesome</h2>
+                <p>Blogging allows you to share your thoughts, ideas, and experiences with the world. It's a great way to connect with others and express yourself.</p>
+            </div>
+        </div>
+    </div>
 
-<button type="button" onclick="alert('Hello world!')">Click Me!</button>
- <P> is another line!</p>
-    <p>Another line</p>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <script>
+        // Add Post Function
+        function addPost() {
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+
+            if (title && content) {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+
+                const postTitle = document.createElement('h2');
+                postTitle.textContent = title;
+
+                const postContent = document.createElement('p');
+                postContent.textContent = content;
+
+                postElement.appendChild(postTitle);
+                postElement.appendChild(postContent);
+
+                document.getElementById('blog-posts').prepend(postElement);
+
+                // Clear the form
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+            } else {
+                alert('Please fill in both title and content.');
+            }
+        }
+
+        // Dark/Light Mode Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
